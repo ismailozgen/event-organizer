@@ -10,6 +10,7 @@ import org.joda.time.format.DateTimeFormatter;
 import com.exercise.organizer.domain.dto.EventScheduleDto;
 import com.exercise.organizer.domain.dto.EventScheduleLatestTimedDto;
 import com.exercise.organizer.domain.model.Event;
+import com.exercise.organizer.domain.model.LightningPresentationEvent;
 
 public interface BaseScheduler {
 
@@ -23,7 +24,14 @@ public interface BaseScheduler {
 		
 		for (Event currEvent : eventList) {
 
-			EventScheduleDto eventScheduleDto = new EventScheduleDto(DTF.print(currentTime),currEvent.getTopic());
+			String durationStr = "";
+			if (currEvent.getDuration() == LightningPresentationEvent.LIGHTNING_DURATION) {
+				durationStr = "lightning";
+			} else {
+				durationStr = currEvent.getDuration() + " mins";
+			}
+			
+			EventScheduleDto eventScheduleDto = new EventScheduleDto(DTF.print(currentTime),currEvent.getTopic(),durationStr);
 
 			eventScheduleList.add(eventScheduleDto);
 

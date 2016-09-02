@@ -18,6 +18,9 @@
 	            <td>
 	            	<c:out value="${morning.getTopic()}"/>
 	            </td>
+	            <td>
+	            	<c:out value="${morning.getDuration()}"/>
+	            </td>
 	        </tr>
         </c:forEach>
         <c:forEach items="${track.getAfternoonSchedule()}" var="afternoon">
@@ -27,6 +30,9 @@
 	            </td>
 	            <td>
 	            	<c:out value="${afternoon.getTopic()}"/>
+	            </td>
+	            <td>
+	            	<c:out value="${afternoon.getDuration()}"/>
 	            </td>
 	        </tr>
         </c:forEach>

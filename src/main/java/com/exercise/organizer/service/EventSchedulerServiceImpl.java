@@ -88,6 +88,7 @@ public class EventSchedulerServiceImpl implements EventSchedulerService{
 		DateTime morningTime = new DateTime().withTime(9, 0, 0, 0);
 		
 		List<EventScheduleDto> morningSchedule = morningScheduler.generateSchedule(morningEventList, morningTime).getEventScheduleList();
+		
 		return morningSchedule;
 	}
 

@@ -1,0 +1,19 @@
+Architecting Your Codebase, 60
+Overdoing it in Python, 45
+Flavors of Concurrency in Java, 30
+Ruby Errors from Mismatched Gem Versions, 45
+JUnit 5 - Shaping the Future of Testing on the JVM, 45
+Cloud Native Java, lightning
+Communicating Over Distance, 60
+AWS Technical Essentials, 45
+Continuous Delivery, 30
+Monitoring Reactive Applications, 30
+Pair Programg vs Noise, 45
+Rails Magic, 60
+Microservices "Just Right", 60
+Clojure Ate Scala (on my project), 45
+Perfect Scalability, 30
+Apache Spark, 30
+Async Testing on JVM, 60
+A World Without HackerNews, 30
+User Interface CSS in Apps, 30

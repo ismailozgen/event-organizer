@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 @Entity
 public class LightningPresentationEvent extends Event{
 
-	private static final Integer LIGHTNING_DURATION = 5;
+	public static final Integer LIGHTNING_DURATION = 5;
 
 	public LightningPresentationEvent() {
 		super();

@@ -48,5 +48,9 @@
     </table>
 </form:form>
 <a href="<spring:url value="/list_events.html" />"><spring:message code="event.list"/></a>
+<br><br>
+<a href="<spring:url value="/batch_insert.html" />"><spring:message code="event.batch.create"/></a>
+<br><br>
+<a href="<spring:url value="/clear_db.html" />"><spring:message code="event.clear.db"/></a>
 </body>
 </html>

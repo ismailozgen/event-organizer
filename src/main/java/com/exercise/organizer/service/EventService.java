@@ -11,4 +11,8 @@ public interface EventService {
 	Event save(Event event);
 	
 	List<EventTrackDto> getEventOrganizationList();
+	
+	void insertBatchDataFromFile();
+	
+	void clearDatabase();
 }

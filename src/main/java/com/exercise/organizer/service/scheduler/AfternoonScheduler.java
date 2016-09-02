@@ -33,11 +33,11 @@ public class AfternoonScheduler implements BaseScheduler{
 		boolean isNetworkingAvaliable = (60 >= remainingMinutes) && (remainingMinutes > 0);
 		
 		if (isNetworkingAvaliable) {
-			eventScheduleList.add(new EventScheduleDto(DTF.print(currentTime), NETWORKING_EVENT_STR));
+			eventScheduleList.add(new EventScheduleDto(DTF.print(currentTime), NETWORKING_EVENT_STR,""));
 		} 
 		
 		if (isNetworkingAvaliable || remainingMinutes == 0) {
-			eventScheduleList.add(new EventScheduleDto(DTF.print(timeLimit), FINISH_STR));
+			eventScheduleList.add(new EventScheduleDto(DTF.print(timeLimit), FINISH_STR,""));
 		}
 		return eventScheduleLatestTimedDto;
 	}

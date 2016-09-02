@@ -60,4 +60,16 @@ public class EventCreateController {
         return "redirect:/save_event.html";
 	}
 	
+	@RequestMapping(value = "/batch_insert.html", method = RequestMethod.GET)
+    public String batchInsertEvents() {
+		eventService.insertBatchDataFromFile();
+        return "redirect:/save_event.html";
+	}
+	
+	@RequestMapping(value = "/clear_db.html", method = RequestMethod.GET)
+    public String clearDatabase() {
+		eventService.clearDatabase();
+        return "redirect:/save_event.html";
+	}
+	
 }

@@ -23,7 +23,7 @@ public class MorningScheduler implements BaseScheduler{
 		
 		currentTime = eventScheduleLatestTimedDto.getLatestTime();
 		
-		eventScheduleList.add(new EventScheduleDto(DTF.print(currentTime),LUNCH_STR));
+		eventScheduleList.add(new EventScheduleDto(DTF.print(currentTime),LUNCH_STR,""));
 
 		return eventScheduleLatestTimedDto;
 	}

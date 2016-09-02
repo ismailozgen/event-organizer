@@ -6,10 +6,12 @@ public class EventScheduleDto {
 
 	private String timeString;
 	private String topic;
+	private String duration;
 	
-	public EventScheduleDto(String timeString, String topic) {
+	public EventScheduleDto(String timeString, String topic, String duration) {
 		this.timeString = timeString;
 		this.topic = topic;
+		this.duration = duration;
 	}
 	
 	public String getTimeString() {
@@ -34,6 +36,14 @@ public class EventScheduleDto {
                 .add("topic", topic)
                 .toString();
     }
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
 
 	
 
