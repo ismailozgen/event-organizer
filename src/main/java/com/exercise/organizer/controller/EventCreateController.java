@@ -24,6 +24,8 @@ public class EventCreateController {
 	private final EventService eventService;
 	private final EventDtoDurationValidator durationValidator;
 	
+	
+	
 	@Autowired
     public EventCreateController(final EventService eventService, final EventDtoDurationValidator durationValidator) {
         this.eventService = eventService;
