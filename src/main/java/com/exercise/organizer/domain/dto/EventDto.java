@@ -1,8 +1,5 @@
 package com.exercise.organizer.domain.dto;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Size;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.google.common.base.Objects;
@@ -12,17 +9,12 @@ public class EventDto {
 	private Integer id;
     
 	@NotEmpty
-    @Size(max = 128)
 	private String topic;
     
-    @NotEmpty
 	private Integer duration;
 	
     private Boolean lightning;
     
-    
-	
-	
 	public Integer getId() {
 		return id;
 	}

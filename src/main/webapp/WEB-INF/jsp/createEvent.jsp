@@ -29,14 +29,17 @@
 <h1><spring:message code="event.create.title"/></h1>
 <!--  a href="<spring:url value="/list_events.html" />"><spring:message code="event.list"/></a-->
 <form:form method="POST" id="myform" action="/save_event.html" modelAttribute="form">
+<form:errors path="" element="div"/>
 	<table border="0" >
     <tr>
         <td><form:label path="topic"><spring:message code="event.topic"/></form:label></td>
         <td><form:input path="topic"/></td>
+        <td><form:errors path="topic"/></td>
     </tr>
     <tr>
         <td><form:label path="duration"><spring:message code="event.duration"/></form:label></td>
         <td><form:input path="duration" id="input_duration" /> or <form:checkbox path="lightning" id="lightning_checkbox" />Lightning </td>
+        <td><form:errors path="duration"/></td>
      </tr>
      <tr>
      	<td></td> 

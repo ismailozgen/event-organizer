@@ -3,73 +3,99 @@ package com.exercise.organizer.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.exercise.organizer.service.EventSchedulerService;
+
 public class EventDurationFinder {
 
 	private List<Integer> listOfDurations = new ArrayList<Integer>();
 	
-	private boolean flag = false;
-	private boolean isAfternoon;
 	private List<Integer> inputDurationsList;
-	private int[] selectedElements;
-	private int targetSum;
-	private int numOfElements;
 
-	public List<Integer> findDurationsForSum(List<Integer> inputDurationsList, int targetSum, boolean isAfternoon) {
+	private boolean isAfternoon;
+	private boolean flag = false;
+
+	private int[] selectedDurations;
+	private int targetDuration;
+	private int inputDurationCount;
+
+	public List<Integer> findDurations(List<Integer> inputDurationsList, int targetDuration, boolean isAfternoon) {
 		
-		this.inputDurationsList = inputDurationsList;
-		this.numOfElements = inputDurationsList.size();
-		this.targetSum = targetSum;
 		this.isAfternoon = isAfternoon;
-		selectedElements = new int[numOfElements];
+		this.inputDurationsList = inputDurationsList;
+		this.inputDurationCount = inputDurationsList.size();
+		this.targetDuration = targetDuration;
 
-		int sumOfAllElements = 0;
+		selectedDurations = new int[inputDurationCount];
+
+		int totalDuration = 0;
+		
 		for(int element : inputDurationsList){
-			sumOfAllElements += element;
+			totalDuration += element;
 		}
-		findDurationsForSum(0, 0, sumOfAllElements);
+		
+		findDurations(0, 0, totalDuration);
 		
 		return listOfDurations;
 		
 	}
 
-	private void findDurationsForSum(int sumTillNow, int index, int sumOfRemaining) {
+	private void findDurations(int currentSum, int index, int remainingSum) {
 		
 		if (flag) {
 			return;
 		}
 		
-		selectedElements[index] = 1; 
+		selectedDurations[index] = 1; 
 		
-		int currentSum = inputDurationsList.get(index) + sumTillNow;
+		int currentTotal = inputDurationsList.get(index) + currentSum;
 		
 		if (!isAfternoon) {
-			if (targetSum == currentSum) {
+			if (targetDuration == currentTotal) {
 				getDurations();
 				return;
 			}
 		} else {
-			if (targetSum + 60 >= currentSum && currentSum >= targetSum) {
+			if (targetDuration + EventSchedulerService.EXTENSION_DURATION >= currentTotal && currentTotal >= targetDuration) {
 				getDurations();
 				return;
 			}
 		}
+		
+		if (isAfternoon){
+			
+			if ((index + 1 < inputDurationCount) && (currentSum + inputDurationsList.get(index) + inputDurationsList.get(index+1) <= targetDuration + EventSchedulerService.EXTENSION_DURATION)) {
+				findDurations(currentSum + inputDurationsList.get(index), index + 1, remainingSum - inputDurationsList.get(index));
+			}
+	
+			selectedDurations[index] = 0;
+	
+			if ((index + 1 < inputDurationCount) && (currentSum + inputDurationsList.get(index+1) <= targetDuration + EventSchedulerService.EXTENSION_DURATION)
+					&& (currentSum + remainingSum - inputDurationsList.get(index) >= targetDuration + EventSchedulerService.EXTENSION_DURATION )) {
+				findDurations(currentSum, index + 1, remainingSum - inputDurationsList.get(index));
+			}
+			
+			
+		} else {
+		
 
-		if ((index + 1 < numOfElements) && (sumTillNow + inputDurationsList.get(index) + inputDurationsList.get(index+1) <= targetSum)) {
-			findDurationsForSum(sumTillNow + inputDurationsList.get(index), index + 1, sumOfRemaining - inputDurationsList.get(index));
-		}
-
-		selectedElements[index] = 0;
-
-		if ((index + 1 < numOfElements) && (sumTillNow + inputDurationsList.get(index+1) <= targetSum)
-				&& (sumTillNow + sumOfRemaining - inputDurationsList.get(index) >= targetSum)) {
-			findDurationsForSum(sumTillNow, index + 1, sumOfRemaining - inputDurationsList.get(index));
+			if ((index + 1 < inputDurationCount) && (currentSum + inputDurationsList.get(index) + inputDurationsList.get(index+1) <= targetDuration)) {
+				findDurations(currentSum + inputDurationsList.get(index), index + 1, remainingSum - inputDurationsList.get(index));
+			}
+	
+			selectedDurations[index] = 0;
+	
+			if ((index + 1 < inputDurationCount) && (currentSum + inputDurationsList.get(index+1) <= targetDuration)
+					&& (currentSum + remainingSum - inputDurationsList.get(index) >= targetDuration)) {
+				findDurations(currentSum, index + 1, remainingSum - inputDurationsList.get(index));
+			}
+		
 		}
 	}
 
 	private void getDurations() {
 		flag = true;
-		for (int i = 0; i < numOfElements; i++) {
-			if (selectedElements[i] == 1) {
+		for (int i = 0; i < inputDurationCount; i++) {
+			if (selectedDurations[i] == 1) {
 				listOfDurations.add(inputDurationsList.get(i));
 			}
 		}

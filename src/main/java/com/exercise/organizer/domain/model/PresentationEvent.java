@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 public class PresentationEvent extends Event{
 
 	public PresentationEvent() {
+		
+		
 		super();
 	}
 	

@@ -12,8 +12,12 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Event {
 
+	
+	
 	private Integer id;
 	private String topic;
+	
+	
 	private Integer duration;
     
 	protected Event() {

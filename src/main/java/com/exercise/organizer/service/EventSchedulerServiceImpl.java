@@ -1,15 +1,11 @@
 package com.exercise.organizer.service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Service;
 
 import com.exercise.organizer.domain.dto.EventScheduleDto;
@@ -20,10 +16,6 @@ import com.exercise.organizer.util.EventDurationFinder;
 
 @Service
 public class EventSchedulerServiceImpl implements EventSchedulerService{
-
-	private static final int LEAST_TRACK_DURATION = 360;
-	private static final int LEAST_SESSION_DURATION = 180;
-	private static final int EXTENSION_DURATION = 60;
 
 	@Resource(name = "morningScheduler")
 	BaseScheduler morningScheduler;
@@ -37,7 +29,7 @@ public class EventSchedulerServiceImpl implements EventSchedulerService{
 
 		List<EventTrackDto> eventTrackDtoList = new ArrayList<EventTrackDto>();
 		
-		// get durations
+		// get all durations
 		List<Integer> durationList = new ArrayList<Integer>();
 		
 		int totalDuration = 0;
@@ -77,7 +69,7 @@ public class EventSchedulerServiceImpl implements EventSchedulerService{
 
 	private List<EventScheduleDto> generateAfternoonSchedule(List<Event> eventList, List<Integer> durationList) {
 		
-		List<Integer> afternoonSessionEventDurationList = new EventDurationFinder().findDurationsForSum(durationList, LEAST_SESSION_DURATION,true);
+		List<Integer> afternoonSessionEventDurationList = new EventDurationFinder().findDurations(durationList, LEAST_SESSION_DURATION,true);
 
 		List<Event> afternoonEventList = getEventList(eventList, durationList, afternoonSessionEventDurationList);
 		
@@ -89,7 +81,7 @@ public class EventSchedulerServiceImpl implements EventSchedulerService{
 
 	private List<EventScheduleDto> generateMorningSchedule(List<Event> eventList, List<Integer> durationList) {
 		
-		List<Integer> morningSessionEventDurationList = new EventDurationFinder().findDurationsForSum(durationList, LEAST_SESSION_DURATION,false);
+		List<Integer> morningSessionEventDurationList = new EventDurationFinder().findDurations(durationList, LEAST_SESSION_DURATION,false);
 
 		List<Event> morningEventList = getEventList(eventList, durationList, morningSessionEventDurationList);
 
