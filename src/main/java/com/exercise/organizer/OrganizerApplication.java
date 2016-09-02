@@ -14,8 +14,6 @@ public class OrganizerApplication extends SpringBootServletInitializer {
 	}
 	
 	public static void main(String[] args) {
-		
-		String s = "";
 		SpringApplication.run(OrganizerApplication.class, args);
 	}
 	
