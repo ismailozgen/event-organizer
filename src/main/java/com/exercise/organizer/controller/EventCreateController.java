@@ -20,6 +20,7 @@ import com.exercise.organizer.validator.EventDtoDurationValidator;
 @Controller
 public class EventCreateController {
 
+	private static final long DB_TEST_DATA_COUNT_LIMIT = 22l;
 	
 	private final EventService eventService;
 	private final EventDtoDurationValidator durationValidator;
@@ -44,8 +45,6 @@ public class EventCreateController {
 	
 	@RequestMapping(value = "/save_event.html", method = RequestMethod.GET)
     public ModelAndView getSaveEventView() {
-        //LOGGER.debug("Received request for user create view");
-		System.out.println("geldi2");
         return new ModelAndView("createEvent", "form", new EventDto());
     }
 	
@@ -62,7 +61,10 @@ public class EventCreateController {
 	
 	@RequestMapping(value = "/batch_insert.html", method = RequestMethod.GET)
     public String batchInsertEvents() {
-		eventService.insertBatchDataFromFile();
+		long totalCount = eventService.getNumberOfEvents();
+		if (totalCount < DB_TEST_DATA_COUNT_LIMIT) {
+			eventService.insertBatchDataFromFile();
+		}
         return "redirect:/save_event.html";
 	}
 	

@@ -15,4 +15,6 @@ public interface EventService {
 	void insertBatchDataFromFile();
 	
 	void clearDatabase();
+	
+	long getNumberOfEvents();
 }

@@ -61,6 +61,12 @@ public class EventServiceImpl implements EventService {
 	}
 
 
+	@Override
+	public long getNumberOfEvents() {
+		return eventRepository.count();
+	}
+
+
 	
 
 	
