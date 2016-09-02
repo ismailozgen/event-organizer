@@ -2,6 +2,7 @@ package com.exercise.organizer.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,9 +20,9 @@ public class EventFileDataOperations {
 		
 		ClassLoader classLoader = EventFileDataOperations.class.getClassLoader();
 		
-		File dataFile = new File(classLoader.getResource("testdata.txt").getFile());
+		InputStream is = classLoader.getResourceAsStream("testdata.txt");
 
-		try (Scanner scanner = new Scanner(dataFile)) {
+		try (Scanner scanner = new Scanner(is)) {
 
 			while (scanner.hasNext()){
 				
@@ -41,12 +42,8 @@ public class EventFileDataOperations {
 				}
 				
 				eventList.add(event);
-				
-				
 			}
 
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
 		return eventList;
